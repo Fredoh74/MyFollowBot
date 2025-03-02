@@ -19,8 +19,6 @@ namespace Copilot
         [Menu(null, "~100 as default")]
         public RangeNode<int> ActionCooldown { get; set; } = new RangeNode<int>(100, 50, 20000); // Cooldown in milliseconds
 
-        [Menu(null, "~200 as default")]
-        public RangeNode<int> IdleDistance { get; set; } = new RangeNode<int>(200, 5, 1000);
         public HotkeyNode TogglePauseHotkey { get; set; } = new HotkeyNode(Keys.OemPeriod); // Default to Period key
         public ToggleNode IsPaused { get; set; } = new ToggleNode(false); // Default to not paused
 
@@ -31,6 +29,11 @@ namespace Copilot
 
         [Menu(null, "If it's in range it will try to TP every {cooldown}, Cooldown in milliseconds (default is 500)")]
         public RangeNode<int> BlinkCooldown { get; set; } = new RangeNode<int>(500, 100, 10000);
+
+
+        public ToggleNode IsPickingUp { get; set; } = new ToggleNode(false);
+        public RangeNode<int> PickupRange { get; set; } = new RangeNode<int>(400, 1, 1000);
+        public TextNode PickupFilter { get; set; } = new TextNode("");
 
 
         public CopilotSettings()

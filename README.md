@@ -12,7 +12,7 @@ It used some of the base code from the [FollowLad](https://github.com/AlphaCaste
 - [x] Use blink to catch up (if the target is getting far away)
 - [x] Close UIs (like chests, crafting tables, etc) if accidentally clicked
 - [x] Auto respawn (will try to respawn, can't if someone else is on the map though)
-- [ ] Pick up items
+- [x] Pick up items
 - [ ] Use skills
 
 ## Settings
