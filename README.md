@@ -12,7 +12,7 @@ It also incorporates some base code from [FollowLad](https://github.com/AlphaCas
 - [x] Use blink to catch up (if the target gets too far away)
 - [x] Close UIs (such as chests, crafting tables, etc.) if clicked accidentally
 - [x] Auto-respawn (will attempt to respawn, unless another player is on the map)
-- [x] Pick up items
+- [x] Pick-up items
 - [ ] Use skills
 
 ## Settings
@@ -25,9 +25,12 @@ Please **do not** open an issue if the plugin isn't working due to your settings
 - If you're moving too fast, it's your fault the bot isn't keeping up, not the plugin's.
 - It's helpful to zoom out using the [WheresMyZoomAt](https://github.com/doubleespressobro/WheresMyZoomAt-PoE2) plugin. (But not too much)
 - I recommend placing the Waypoint and Map Device close to each other.
+- Since the bot picks up everything, it's best to use a [good loot filter](https://www.filterblade.xyz/?game=Poe2) for the pick-up items feature.
 
 ## Known bugs
 - May experience issues in "ARENA".
 
 ## Donations
-[![Donate with PayPal](./assets/donate.png)](https://www.paypal.com/donate/?hosted_button_id=NX4PVU9B2YFDU)
+<a href="https://www.paypal.com/donate/?hosted_button_id=NX4PVU9B2YFDU">
+  <img src="./assets/donate.png" width="200">
+</a>
