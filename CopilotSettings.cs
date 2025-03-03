@@ -52,8 +52,8 @@ namespace Copilot
         [Menu("Range", "The minimum range required to pick up an item. Default: 400.")]
         public RangeNode<int> Range { get; set; } = new RangeNode<int>(400, 1, 1000);
 
-        [Menu("Item Filter", "Comma-separated list of item names to pick up. e.g. Exalted Orb,Chaos Orb,...")]
-        public TextNode Filter { get; set; } = new TextNode("Exalted Orb,Chaos Orb,Divine Orb,Mirror of Kalandra");
+        [Menu("Item Filter", "Comma-separated list of item names to pick up. e.g. Orb,Mirror,...")]
+        public TextNode Filter { get; set; } = new TextNode("Orb,Mirror");
 
         [Menu("Ignore if target too far", "If the target is too far away, ignore the items. Default: 1200.")]
         public RangeNode<int> RangeToIgnore { get; set; } = new RangeNode<int>(1200, 1, 3000);
