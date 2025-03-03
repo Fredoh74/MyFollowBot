@@ -133,19 +133,22 @@ namespace Copilot
                 }
                 if (CurrentArea.IsTown) return;
 
+                var targetPos = _followTarget.Pos;
+                if (lastTargetPosition == Vector3.Zero) lastTargetPosition = targetPos;
+                var distanceToTarget = Vector3.Distance(myPos, targetPos);
+
                 // Check for items on the ground
-                if (Settings.IsPickingUp.Value)
+                if (Settings.Pickup.Enable.Value && distanceToTarget <= Settings.Pickup.RangeToIgnore.Value)
                 {
                     var items = IngameUi.ItemsOnGroundLabelsVisible;
-                    LogMessage($"Found {items?.Count} items on the ground");
                     if (items != null)
                     {
-                        var filteredItems = Settings.PickupFilter.Value.Split(',');
+                        var filteredItems = Settings.Pickup.Filter.Value.Split(',');
                         var item = items?.FirstOrDefault(x => filteredItems.Any(y => x.Label.Text != null && x.Label.Text.Contains(y)));
                         if (item != null)
                         {
                             var distanceToItem = Vector3.Distance(myPos, item.ItemOnGround.Pos);
-                            if (distanceToItem <= Settings.PickupRange.Value)
+                            if (distanceToItem <= Settings.Pickup.Range.Value)
                             {
                                 var screenPos = Camera.WorldToScreen(item.ItemOnGround.Pos);
                                 var screenPoint = new Point((int)screenPos.X, (int)screenPos.Y);
@@ -157,10 +160,6 @@ namespace Copilot
                         }
                     }
                 }
-
-                var targetPos = _followTarget.Pos;
-                if (lastTargetPosition == Vector3.Zero) lastTargetPosition = targetPos;
-                var distanceToTarget = Vector3.Distance(myPos, targetPos);
 
                 // If within the follow distance, do nothing
                 if (distanceToTarget <= Settings.FollowDistance.Value) return;
@@ -178,12 +177,12 @@ namespace Copilot
                     _nextAllowedActionTime = DateTime.Now.AddMilliseconds(1000);
                     return;
                 }
-                else if (Settings.UseBlink.Value && DateTime.Now > _nextAllowedBlinkTime && distanceToTarget > Settings.BlinkRange.Value)
+                else if (Settings.Blink.Enable.Value && DateTime.Now > _nextAllowedBlinkTime && distanceToTarget > Settings.Blink.Range.Value)
                 {
                     MoveToward(targetPos);
                     Thread.Sleep(50);
                     Keyboard.KeyPress(Keys.Space);
-                    _nextAllowedBlinkTime = DateTime.Now.AddMilliseconds(Settings.BlinkCooldown.Value);
+                    _nextAllowedBlinkTime = DateTime.Now.AddMilliseconds(Settings.Blink.Cooldown.Value);
                 }
                 else
                 {
