@@ -143,8 +143,10 @@ namespace Copilot
                     var items = IngameUi.ItemsOnGroundLabelsVisible;
                     if (items != null)
                     {
-                        var filteredItems = Settings.Pickup.Filter.Value.Split(',');
-                        var item = items?.FirstOrDefault(x => filteredItems.Any(y => x.Label.Text != null && x.Label.Text.Contains(y)));
+                        // var filteredItems = Settings.Pickup.Filter.Value.Split(',');
+                        var item = items?
+                            .OrderBy(x => Vector3.Distance(myPos, x.ItemOnGround.Pos))
+                            .FirstOrDefault(/*x => filteredItems.Any(y => x.Label.Text != null && x.Label.Text.Contains(y))*/);
                         if (item != null)
                         {
                             var distanceToItem = Vector3.Distance(myPos, item.ItemOnGround.Pos);
