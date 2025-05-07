@@ -229,7 +229,7 @@ namespace Copilot
                 .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
                 .FirstOrDefault();
             var monster2 = EntityList
-                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity < MonsterRarity.AtLeastRare ))
+                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity = MonsterRarity.Any ))
                 .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
                 .FirstOrDefault();
             
