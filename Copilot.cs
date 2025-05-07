@@ -238,23 +238,9 @@ namespace Copilot
                     Mouse.SetCursorPosition(screenPoint);
                     Thread.Sleep(100);
 
-                    Keyboard.KeyPress(Settings.ShockBot.BallLightningKey.Value);
-
-                    // start tracking the balls
-                    var ball = EntityList
-                        .Where(e => e.IsDead && e.Metadata == "Metadata/Projectiles/BallLightningPlayer")
-                        .OrderBy(e => Vector3.Distance(monster.Pos, e.Pos))
-                        .FirstOrDefault();
-
-                    if (ball != null && Vector3.Distance(monster.Pos, ball.Pos) <= Settings.ShockBot.RangeToUseLightningWarp.Value)
-                    {
-                        var ballScreenPos = Camera.WorldToScreen(ball.Pos);
-                        var ballScreenPoint = new Point((int)ballScreenPos.X, (int)ballScreenPos.Y);
-                        Mouse.SetCursorPosition(ballScreenPoint);
-                        Thread.Sleep(100);
-                        Keyboard.KeyPress(Settings.ShockBot.LightningWarpKey.Value);
-                    }
-
+                    Keyboard.KeyPress(Keys.R);
+                    Thread.Sleep(2500);
+                    Keyboard.KeyPress(Keys.E);
                     _nextAllowedActionTime = DateTime.Now.AddMilliseconds(Settings.ActionCooldown.Value);
                     _nextAllowedShockTime = DateTime.Now.AddMilliseconds(Settings.ShockBot.ActionCooldown.Value);
                     return true;
