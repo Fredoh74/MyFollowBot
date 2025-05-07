@@ -228,6 +228,11 @@ namespace Copilot
                 .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity = MonsterRarity.Rare || e.Rarity == MonsterRarity.Unique))
                 .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
                 .FirstOrDefault();
+            var monster2 = EntityList
+                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity < MonsterRarity.AtLeastRare ))
+                .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
+                .FirstOrDefault();
+            
             if (monster != null)
             {
                 var distanceToMonster = Vector3.Distance(PlayerPos, monster.Pos);
@@ -246,16 +251,12 @@ namespace Copilot
                     return true;
                 }
             }
-            var monster_Normal_or_Magic = EntityList
-                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity != MonsterRarity.Rare || e.Rarity != MonsterRarity.Unique))
-                .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
-                .FirstOrDefault();
-            if (monster_Normal_or_Magic != null)
+            if (monster2 != null)
             {
-                var distanceToMonster = Vector3.Distance(PlayerPos, monster_Normal_or_Magic.Pos);
+                var distanceToMonster = Vector3.Distance(PlayerPos, monster2.Pos);
                 if (distanceToMonster <= Settings.ShockBot.Range)
                 {
-                    var screenPos = Camera.WorldToScreen(monster_Normal_or_Magic.Pos);
+                    var screenPos = Camera.WorldToScreen(monster2.Pos);
                     var screenPoint = new Point((int)screenPos.X, (int)screenPos.Y);
                     Mouse.SetCursorPosition(screenPoint);
                     Thread.Sleep(100);
