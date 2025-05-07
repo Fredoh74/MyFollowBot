@@ -246,6 +246,27 @@ namespace Copilot
                     return true;
                 }
             }
+            var monster = EntityList
+                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity == MonsterRarity.Normal || e.Rarity == MonsterRarity.Magic))
+                .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
+                .FirstOrDefault();
+            if (monster != null)
+            {
+                var distanceToMonster = Vector3.Distance(PlayerPos, monster.Pos);
+                if (distanceToMonster <= Settings.ShockBot.Range)
+                {
+                    var screenPos = Camera.WorldToScreen(monster.Pos);
+                    var screenPoint = new Point((int)screenPos.X, (int)screenPos.Y);
+                    Mouse.SetCursorPosition(screenPoint);
+                    Thread.Sleep(100);
+
+                    Keyboard.KeyPress(Keys.T);
+                
+                    _nextAllowedActionTime = DateTime.Now.AddMilliseconds(Settings.ActionCooldown.Value);
+                    _nextAllowedShockTime = DateTime.Now.AddMilliseconds(Settings.ShockBot.ActionCooldown.Value);
+                    return true;
+                }
+            }
             _nextAllowedShockTime = DateTime.Now.AddMilliseconds(Settings.ShockBot.ActionCooldown.Value);
             return false;
         }
