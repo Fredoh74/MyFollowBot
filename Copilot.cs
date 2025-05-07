@@ -225,11 +225,11 @@ namespace Copilot
         private bool ShockBotCode()
         {
             var monster = EntityList
-                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity = MonsterRarity.Rare || e.Rarity == MonsterRarity.Unique))
+                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity == MonsterRarity.Rare || e.Rarity == MonsterRarity.Unique))
                 .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
                 .FirstOrDefault();
             var monster2 = EntityList
-                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity = MonsterRarity.Any ))
+                .Where(e => e.Type == EntityType.Monster && e.IsAlive && (e.Rarity == MonsterRarity.Any ))
                 .OrderBy(e => Vector3.Distance(PlayerPos, e.Pos))
                 .FirstOrDefault();
             
